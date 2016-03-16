@@ -36,9 +36,10 @@ namespace EjercicioNro01
             }
             promedio = sum / num.Length;
 
-            Console.WriteLine("Valor Maximo: ", num.Max());
-            Console.WriteLine("Valor Minimo: ", num.Min());
-            Console.WriteLine("Valor Promedio: ", promedio);
+            Console.WriteLine("Valor Maximo: {0}", num.Max());
+            Console.WriteLine("Valor Minimo: {0}", num.Min());
+            Console.WriteLine("Valor Promedio: {0}", promedio);
+            Console.ReadLine();
             
         }
     }
