@@ -31,7 +31,7 @@ namespace EjercicioNro02
 
             Console.WriteLine("El cuadrado de {0} es {1}", numero, cuadrado);
             Console.WriteLine("El cubo de {0} es {1}", numero, cubo);
-
+            Console.ReadLine();
         }
     }
 }
