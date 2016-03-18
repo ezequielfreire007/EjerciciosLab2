@@ -14,7 +14,6 @@ namespace EjercicioNro03
 
             String dato = null;
             int numero = 0;
-            int [] primo;
             
 
             Console.WriteLine("Ingrese un numero: ");
@@ -26,32 +25,25 @@ namespace EjercicioNro03
                 dato = Console.ReadLine();
             }
 
-            for (int j = numero; numero <= 2; j--)
+            for (int i = 1; i < numero; i++)
             {
-                int numeroPrimo = numero;
                 int cont = 0;
-                int cont2 = 0;
-                while (cont == 0)
+                for (int j = 1; j < numero; j++)
                 {
-                    for (int j = numeroPrimo - 1; numeroPrimo <= 2; j--)
+                    if (i % j == 0)
                     {
-                        if (numero % numeroPrimo == 0)
-                        {
-                            cont++;
-                        } 
+                        cont++;
                     }
-                    
-                    primo[cont2] = numero;
-                    cont2++;
                 }
+
+                if (cont == 2)
+                {
+                    Console.WriteLine("{0}, es primo", i);
+                }
+                
             }
-
-            Console.WriteLine("Numeros primos");
-            for(int i = 0; i < primo.Length; i++)
-            {
-
-            }
-
+      
+            Console.ReadLine();
         }
     }
 }
