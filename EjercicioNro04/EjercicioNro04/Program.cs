@@ -12,26 +12,43 @@ namespace EjercicioNro04
         {
             Console.Title = "Ejercicio Nro 04";
 
-            String dato = null;
-            int numero = 0;
+            int numero = 1;
             bool bandera = true;
-            int [] numDivisor;
             int cont = 0;
-
-            Console.WriteLine("Ingrese un numero: ");
-            dato = Console.ReadLine();
-
-            while(int.TryParse(dato, out numero) == false)
-            {
-                Console.WriteLine();
-            }
-
+                                  
             do
             {
+                numero++;
+                
+                int suma = 0;
 
+                for (int i = 1; i < numero; i++)
+                {
+                    
+                    if (numero % i == 0)
+                    {
+                        //Console.WriteLine("{0}, es divisor ", i);
+                        suma = suma + i;
+
+                    }
+
+                    if (suma == numero)
+                    {
+                        Console.WriteLine("{0}, es perfecto", numero);
+                        cont++;
+                        break;
+                    }
+
+                    if (cont == 4)
+                    {
+                        bandera = false;
+                    }
+  
+                }   
 
             }while(bandera == true);
 
+            Console.ReadLine();
         }
     }
 }
