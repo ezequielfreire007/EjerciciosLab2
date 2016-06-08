@@ -2,16 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace CentralitaSerializacion
 {
-    public class Centralita:ISerializable
+    [XmlInclude(typeof(Centralita))]
+    public class Centralita : ISerializable
     {
         #region Atributos
         private List<Llamada> _listaDeLlamada;
         protected String _razonSocial;
+        private String _ruta;
         #endregion
 
         #region Propiedades
@@ -35,6 +39,18 @@ namespace CentralitaSerializacion
 
             get { return this._listaDeLlamada; }
         
+        }
+
+        public string RutaDeArchivo
+        {
+            get
+            {
+                return this._ruta;
+            }
+            set
+            {
+                this._ruta = value;
+            }
         }
         #endregion
 
@@ -178,28 +194,60 @@ namespace CentralitaSerializacion
 
         #endregion
 
-
-        /*Foo*/
-        public string RutaDeArchivo
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        #region Metodos Deserealizar y Serializar
 
         public bool Deserealizarse()
         {
-            throw new NotImplementedException();
+            bool retorno = false;
+            Centralita aux;
+            try
+            {
+                using (XmlTextReader lector = new XmlTextReader(this.RutaDeArchivo + "/Centralita.Xml"))
+                {
+                    XmlSerializer serilizar = new XmlSerializer(typeof(Centralita));
+                    aux = (Centralita)serilizar.Deserialize(lector);
+                    Console.WriteLine("-------- Objeto Deserializado ------------");
+                    aux.ToString();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                CentralitaExeption miExcepcion = new CentralitaExeption("Error al intentar Deserializar", this.GetType().ToString(), "Deserializar",ex);
+                Console.WriteLine("Mensaje: {0}", miExcepcion.Message);
+                Console.WriteLine("Clase: {0}", miExcepcion.NombreClase);
+                Console.WriteLine("Metodo: {0}", miExcepcion.NombreMetodo);
+                Console.WriteLine("Mensaje de la Excepcion: {0}", miExcepcion.InnerException.Message);
+                return false;
+            }
+
+            return retorno;
         }
 
         public bool Serializarse()
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (XmlTextWriter escritor = new XmlTextWriter(this.RutaDeArchivo + "/Centralita.Xml" ,Encoding.UTF8))
+                {
+                    XmlSerializer serializar = new XmlSerializer(typeof(Centralita));
+                    serializar.Serialize(escritor, this);
+                    Console.WriteLine("Objeto Serializado de forma exitosa.");
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                CentralitaExeption miExcepcion = new CentralitaExeption("Error al intentar serializar", this.GetType().ToString(), "Serialize",ex);
+                Console.WriteLine("Mensaje: {0}",miExcepcion.Message);
+                Console.WriteLine("Clase: {0}", miExcepcion.NombreClase);
+                Console.WriteLine("Metodo: {0}", miExcepcion.NombreMetodo);
+                Console.WriteLine("Mensaje de la Excepcion: {0}", miExcepcion.InnerException.Message);
+                return false;
+            }
         }
+
+        #endregion
+ 
     }
 }

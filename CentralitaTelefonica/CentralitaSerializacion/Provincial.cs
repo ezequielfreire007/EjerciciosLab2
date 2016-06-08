@@ -56,8 +56,7 @@ namespace CentralitaSerializacion
         }
 
         protected string Mostrar()
-        {
-            
+        {     
             StringBuilder sb = new StringBuilder();
             sb.Append(base.Mostrar());
             sb.AppendLine("Franja Horaria: " + this._franjaHoraria);
