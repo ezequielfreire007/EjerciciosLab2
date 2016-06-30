@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace CentralitaSerializacion
 {
-    [XmlInclude(typeof(Llamada)]
+    [XmlInclude(typeof(Llamada))]
     [XmlInclude(typeof(Local))]
     [XmlInclude(typeof(Provincial))]
     public abstract class Llamada

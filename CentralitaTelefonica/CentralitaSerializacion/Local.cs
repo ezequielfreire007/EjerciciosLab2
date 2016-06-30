@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace CentralitaSerializacion
@@ -53,6 +54,7 @@ namespace CentralitaSerializacion
             return sb.ToString();
         }
         #endregion
+
 
         #region Sobrecarga Equal y ToString
         public override bool Equals(object obj)

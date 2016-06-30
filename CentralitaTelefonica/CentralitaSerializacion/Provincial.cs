@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace CentralitaSerializacion
 {
+   
     [XmlInclude(typeof(Provincial))]
     public class Provincial : Llamada
     {
+        
         #region Atributos
         protected Franja _franjaHoraria;
         #endregion
@@ -33,7 +36,9 @@ namespace CentralitaSerializacion
 
         public Provincial(String origen, Franja miFranja, float duracion, String destino)
             : base(origen, destino, duracion)
-        { }
+        {
+            this._franjaHoraria = miFranja;
+        }
         #endregion
 
         #region Metodos

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CentralitaSerializacion
 {
-    enum Franja
+    public enum Franja
     {
         Franja_1,
         Franja_2,

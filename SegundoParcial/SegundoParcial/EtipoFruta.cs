@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CentralitaSerializacion
+namespace SegundoParcial
 {
-    public enum TipoLlamada
+    enum EtipoFruta
     {
-        Local,
-        Provincial,
-        Todas
+        Manzana,
+        Platano,
+        Todo
     }
 }

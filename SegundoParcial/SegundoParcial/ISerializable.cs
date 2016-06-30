@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CentralitaSerializacion
+namespace SegundoParcial
 {
-    public enum TipoLlamada
+    interface ISerializable
     {
-        Local,
-        Provincial,
-        Todas
+        string RutaArchivo { get; set; }
+
+        bool SerializarXML();
     }
 }

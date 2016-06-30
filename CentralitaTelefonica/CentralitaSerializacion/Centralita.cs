@@ -57,9 +57,6 @@ namespace CentralitaSerializacion
         #region Constructores
 
         public Centralita()
-        { }
-
-        public Centralita()
         {
             this._listaDeLlamada = new List<Llamada>(1);
         }
@@ -161,7 +158,7 @@ namespace CentralitaSerializacion
 
             foreach (Llamada item in centralita._listaDeLlamada)
 	        {
-                if (item == llamada)
+                if (item.Equals(llamada))
                 {
                     retorno = true;
                     break;
@@ -198,11 +195,11 @@ namespace CentralitaSerializacion
 
         public bool Deserealizarse()
         {
-            bool retorno = false;
+            
             Centralita aux;
             try
             {
-                using (XmlTextReader lector = new XmlTextReader(this.RutaDeArchivo + "/Centralita.Xml"))
+                using (XmlTextReader lector = new XmlTextReader(this.RutaDeArchivo ))
                 {
                     XmlSerializer serilizar = new XmlSerializer(typeof(Centralita));
                     aux = (Centralita)serilizar.Deserialize(lector);
@@ -217,18 +214,18 @@ namespace CentralitaSerializacion
                 Console.WriteLine("Mensaje: {0}", miExcepcion.Message);
                 Console.WriteLine("Clase: {0}", miExcepcion.NombreClase);
                 Console.WriteLine("Metodo: {0}", miExcepcion.NombreMetodo);
-                Console.WriteLine("Mensaje de la Excepcion: {0}", miExcepcion.InnerException.Message);
+                Console.WriteLine("Mensaje de la Excepcion: {0}", ex.Message);
                 return false;
             }
 
-            return retorno;
+
         }
 
         public bool Serializarse()
         {
             try
             {
-                using (XmlTextWriter escritor = new XmlTextWriter(this.RutaDeArchivo + "/Centralita.Xml" ,Encoding.UTF8))
+                using (XmlTextWriter escritor = new XmlTextWriter(this.RutaDeArchivo ,Encoding.UTF8))
                 {
                     XmlSerializer serializar = new XmlSerializer(typeof(Centralita));
                     serializar.Serialize(escritor, this);
@@ -242,11 +239,36 @@ namespace CentralitaSerializacion
                 Console.WriteLine("Mensaje: {0}",miExcepcion.Message);
                 Console.WriteLine("Clase: {0}", miExcepcion.NombreClase);
                 Console.WriteLine("Metodo: {0}", miExcepcion.NombreMetodo);
-                Console.WriteLine("Mensaje de la Excepcion: {0}", miExcepcion.InnerException.Message);
+                Console.WriteLine("Mensaje de la Excepcion: {0}", ex.Message);
                 return false;
             }
         }
 
+        public bool GuardarEnArchivo(Llamada unaLlamada, bool agrego)
+        {
+            
+            try
+            {
+                using (StreamWriter archivo = new StreamWriter(this.RutaDeArchivo, agrego))
+                {
+
+                    archivo.WriteLine("Fecha y hora: {0}", DateTime.Now);
+                    archivo.WriteLine("-------------------------------");
+                    archivo.WriteLine(unaLlamada.ToString());
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                CentralitaExeption miExcepcion = new CentralitaExeption("Problema al guardar archivo", this.GetType().ToString(), "GuardarEnArchivo");
+                Console.WriteLine("Mensaje: {0}", miExcepcion.Message);
+                Console.WriteLine("Clase: {0}", miExcepcion.NombreClase);
+                Console.WriteLine("Metodo: {0}", miExcepcion.NombreMetodo);
+                Console.WriteLine("Mensaje de la Excepcion: {0}", ex.Message);
+                return false;    
+            }
+           
+        }
         #endregion
  
     }
