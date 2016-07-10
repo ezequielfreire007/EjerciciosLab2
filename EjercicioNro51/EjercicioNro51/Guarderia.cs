@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace EjercicioNro51
 {
@@ -101,10 +104,12 @@ namespace EjercicioNro51
             {
                 if (item is Perro)
                 {
-                    /*Foo*/
+                    sb.AppendLine(((Perro)item).mostrar());
                 }
-
-                sb.AppendLine();
+                else
+                {
+                    sb.AppendLine(((Gato)item).mostrar());
+                }
             }
 
             return sb.ToString();
@@ -113,22 +118,84 @@ namespace EjercicioNro51
 
         public bool ImprimirDatosListaMascota()
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (StreamWriter archivo = new StreamWriter("Lista.txt", false))
+                {
+                    archivo.Write(this.ToString());
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+                
+            }
+            
         }
 
         public bool SerializarListaMascota()
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (XmlTextWriter escritor = new XmlTextWriter("Lista.Xml",Encoding.UTF8))
+                {
+                    XmlSerializer ser = new XmlSerializer(typeof(List<Mascota>));
+                    ser.Serialize(escritor, this._listaMascota);
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
 
         public bool DeserealizarListaMascota()
         {
-            throw new NotImplementedException();
+            try
+            {
+                List<Mascota> aux;
+
+                using (XmlTextReader lector = new XmlTextReader("Lista.Xml"))
+                {
+                    XmlSerializer des = new XmlSerializer(typeof(List<Mascota>));
+                    aux = (List<Mascota>)des.Deserialize(lector);
+                    foreach (Mascota item in aux)
+                    {
+                        if (item is Perro)
+                        {
+                            Console.WriteLine(((Perro)item).mostrar());
+                        }
+                        else
+                        {
+                            Console.WriteLine(((Gato)item).mostrar());
+                        }
+                    }
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
         }
 
         public bool TraerDatosMascota()
         {
-            throw new NotImplementedException();
+            try
+            {
+                
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                return false;
+            }
         }
     }
 }

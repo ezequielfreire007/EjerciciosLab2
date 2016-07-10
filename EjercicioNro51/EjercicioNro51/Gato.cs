@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace EjercicioNro51
 {
+    [XmlInclude(typeof(Gato))]
     public class Gato : Mascota
     {
         #region Atributos
@@ -16,6 +19,9 @@ namespace EjercicioNro51
         #endregion
 
         #region Constructor
+        public Gato()
+        { }
+
         public Gato(string nombreGato, ERaza razaGato):base(nombreGato,razaGato)
         { }
 
@@ -29,12 +35,15 @@ namespace EjercicioNro51
         {
             return gatito._raza;
         }
-        public override void mostrar()
+        public override string mostrar()
         {
-            Console.WriteLine("----- Gato ------");
-            Console.WriteLine("Nombre: {0}", base._nombre);
-            Console.WriteLine("Edad: {0}", base._edad);
-            Console.WriteLine("Raza: {0}", base._raza);
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("----- Gato ------");
+            sb.AppendLine("Nombre: " + base._nombre);
+            sb.AppendLine("Edad: " + base._edad);
+            sb.AppendLine("Raza: " + base._raza);
+
+            return sb.ToString();
         }
         #endregion
 

@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace EjercicioNro51
 {
+    [XmlInclude(typeof(Mascota))]
+    [XmlInclude(typeof(Perro))]
+    [XmlInclude(typeof(Gato))]
     public abstract class Mascota
     {
         #region Atributos
@@ -19,6 +24,9 @@ namespace EjercicioNro51
         #endregion
 
         #region Constructor
+        public Mascota()
+        { }
+
         public Mascota(string nombre, ERaza raza)
         {
             this._nombre = nombre;
@@ -37,7 +45,7 @@ namespace EjercicioNro51
             Console.WriteLine("Juego con " + conQueJuego);
         }
 
-        public abstract void mostrar();
+        public abstract string mostrar();
         #endregion
     }
 }
