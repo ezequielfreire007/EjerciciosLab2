@@ -188,12 +188,18 @@ namespace EjercicioNro51
         {
             try
             {
-                
+                string dato;
+
+                using (StreamReader lee = new StreamReader("Lista.txt"))
+                {
+                    dato = lee.ReadToEnd();
+                    Console.WriteLine(dato);    
+                }
                 return true;
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex.Message);
                 return false;
             }
         }
