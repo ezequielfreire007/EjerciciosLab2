@@ -45,6 +45,8 @@
     <Compile Include="ERaza.cs" />
     <Compile Include="Gato.cs" />
     <Compile Include="Guarderia.cs" />
+    <Compile Include="ICargar.cs" />
+    <Compile Include="IGuardar.cs" />
     <Compile Include="Mascota.cs" />
     <Compile Include="Perro.cs" />
     <Compile Include="Program.cs" />
