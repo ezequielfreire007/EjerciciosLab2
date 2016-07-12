@@ -37,6 +37,9 @@ namespace EjercicioNro51
             miGuarderia.SerializarListaMascota();
             miGuarderia.DeserealizarListaMascota();
             miGuarderia.TraerDatosMascota();
+
+            Console.WriteLine(miGuarderia.ToString());
+            Console.ReadLine();
         }
     }
 }
